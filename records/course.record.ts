@@ -13,21 +13,23 @@ export class CourseRecord implements CourseEntity {
     name: string;
     description?: string;
     startDate: Date;
-    isActive: Boolean;
+    isActive: boolean;
 
 
     constructor(obj: NewCourseEntity) {
 
-        if ( obj.id && obj.id.length !== 36 ) {
-            throw new ValidationError('Wrong format of id')
+        if ( obj.id ) {
+            if ( obj.id.length !== 36 ) {
+                throw new ValidationError('Wrong format of id')
+            }
         }
 
         if ( !obj.name || obj.name.length > 100 ) {
-            throw new ValidationError('Ad name should be between 1 and 100 characters long')
+            throw new ValidationError('Course name should be between 1 and 100 characters long')
         }
 
         if ( obj.description && obj.description.length > 1000 ) {
-            throw new ValidationError('Ad description cannot be longer then 1000 characters')
+            throw new ValidationError('Course description cannot be longer then 1000 characters')
         }
 
         if ( !obj.startDate ||  !(obj.startDate instanceof Date) ) {
@@ -35,7 +37,7 @@ export class CourseRecord implements CourseEntity {
         }
 
         if (  obj.isActive  === null ) {
-            throw new ValidationError('isActive field must be defined')
+            throw new ValidationError('isActive field must be clearly defined')
         }
 
         this.id = obj.id ?? uuid();
