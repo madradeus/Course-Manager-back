@@ -7,16 +7,12 @@ export const coursesRouter = Router();
 
 coursesRouter
     .get('/', async (req, res) => {
-        const { name } = req.query as {
-            name: string
-        };
 
-        res.json(await CourseRecord.findAll(name ?? ''));
+        res.json(await CourseRecord.getAll());
     })
     .get('/:id', async (req, res) => {
 
         res.json(await CourseRecord.getOne(req.params.id));
-
 
     })
     .post('/', async (req, res) => {

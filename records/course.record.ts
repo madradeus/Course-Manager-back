@@ -1,4 +1,4 @@
-import { CourseEntity, NewCourseEntity } from "../types";
+import { CourseEntity, NewCourseEntity, SimpleCourseEntity } from "../types";
 import { v4 as uuid } from "uuid";
 import { ValidationError } from "../utils/errors";
 import { pool } from "../db/db";
@@ -47,12 +47,13 @@ export class CourseRecord implements CourseEntity {
         this.isActive = Boolean(Number(obj.isActive));
     }
 
-    static async findAll(name: string): Promise<CourseRecord[]> {
-        const [foundCourses] = await pool.execute("SELECT * from `courses` WHERE name LIKE :name ORDER BY `name` ASC", {
-            name: `%${name}%`,
-        }) as ManyCoursesRecordsResult
+    static async getAll(): Promise<SimpleCourseEntity []> {
+        const [foundCourses] = await pool.execute("SELECT `id`, `name`, `description`, `isActive` from `courses` ORDER BY `name` ASC") as ManyCoursesRecordsResult
 
-        return foundCourses.map(course => new CourseRecord(course));
+        return foundCourses.map(course => ({
+            ...course,
+            isActive: !!Number(course.isActive)
+        }));
 
     }
 
