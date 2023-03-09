@@ -4,6 +4,7 @@ import cors from "cors";
 import { handleError } from "./utils/errors";
 import rateLimit from "express-rate-limit";
 import { coursesRouter } from "./routers/coursesRouter";
+import { studentRouter } from "./routers/studentRouter";
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(json({
 // }));
 
 app.use('/courses', coursesRouter);
+app.use('/students', studentRouter);
 app.use(handleError);
 
 app.listen(3001, '0.0.0.0', () => console.log('listening on http://localhost:3001/'));

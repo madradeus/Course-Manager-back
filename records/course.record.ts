@@ -16,7 +16,7 @@ export class CourseRecord implements CourseEntity {
     isActive: boolean;
 
 
-    constructor(obj: NewCourseEntity) {
+    constructor(obj: NewCourseEntity | CourseEntity) {
 
         if ( obj.id ) {
             if ( obj.id.length !== 36 ) {
