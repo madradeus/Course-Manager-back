@@ -28,7 +28,8 @@ test('StudentRecord.insert() returns id',  async () => {
 
 test('StudentRecord.insert() inserts record to db and StudentRecord.getOne() returns record from db', async () => {
     const newStudent = new StudentRecord({
-        ...defaultStudent
+        ...defaultStudent,
+        lastName: `${defaultStudent.lastName}[TEST]`,
     });
     const insertedId = await newStudent.insert();
     const foundStudent = await StudentRecord.getOne(insertedId);
