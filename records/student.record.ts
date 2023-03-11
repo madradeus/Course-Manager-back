@@ -6,6 +6,7 @@ import { pool } from "../db/db";
 import { FieldPacket } from "mysql2";
 
 
+
 type ManyStudentsRecordsResult = [SimpleStudentEntity[], FieldPacket[]];
 type SingleStudentRecord = [StudentEntity[], FieldPacket[]];
 
@@ -78,6 +79,13 @@ export class StudentRecord implements StudentEntity {
         await pool.execute("INSERT INTO `students` VALUES (:id, :firstName, :lastName, :gender, :dateOfBirth, :emailAddress)", this);
 
         return this.id;
+    }
+
+    static async getBirthdayStudents(): Promise<SimpleStudentEntity[] | []> {
+
+        const [birthdayStudents] = await pool.execute("SELECT `id`, `firstName`, `lastName` FROM `students` WHERE DAY(dateOfBirth) = DAY(curdate())AND MONTH(dateOfBirth) = MONTH(curdate())") as ManyStudentsRecordsResult;
+
+        return birthdayStudents;
     }
 
 }

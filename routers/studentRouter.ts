@@ -11,6 +11,11 @@ studentRouter
 
         res.json(await StudentRecord.getAll());
     })
+    .get('/birthday-students', async (req, res) =>{
+
+        res.json(await StudentRecord.getBirthdayStudents());
+
+    })
     .get('/:id', async (req, res) => {
         const { id } = req.params;
 
@@ -28,3 +33,4 @@ studentRouter
         res.status(201);
         res.json(await newStudent.insert());
     })
+
