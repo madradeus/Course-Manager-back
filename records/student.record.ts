@@ -83,7 +83,7 @@ export class StudentRecord implements StudentEntity {
 
     static async getBirthdayStudents(): Promise<SimpleStudentEntity[] | []> {
 
-        const [birthdayStudents] = await pool.execute("SELECT `id`, `firstName`, `lastName` FROM `students` WHERE DAY(dateOfBirth) = DAY(curdate())AND MONTH(dateOfBirth) = MONTH(curdate())") as ManyStudentsRecordsResult;
+        const [birthdayStudents] = await pool.execute("SELECT `id`, `firstName`, `lastName` FROM `students` WHERE DAY(dateOfBirth) = DAY(curdate()) AND MONTH(dateOfBirth) = MONTH(curdate())") as ManyStudentsRecordsResult;
 
         return birthdayStudents;
     }
