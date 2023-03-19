@@ -6,8 +6,4 @@ export interface CourseEntity {
     isActive: boolean;
 }
 
-export interface NewCourseEntity extends Omit<CourseEntity, 'id'> {
-    id?: string
-}
-
 export type SimpleCourseEntity = Omit<CourseEntity, 'startDate'>

@@ -1,4 +1,4 @@
-import { CourseEntity, NewCourseEntity, SimpleCourseEntity } from "../types";
+import { CourseEntity, NewCourseDto, SimpleCourseEntity } from "../types";
 import { v4 as uuid } from "uuid";
 import { ValidationError } from "../utils/errors";
 import { pool } from "../db/db";
@@ -16,7 +16,7 @@ export class CourseRecord implements CourseEntity {
     isActive: boolean;
 
 
-    constructor(obj: NewCourseEntity) {
+    constructor(obj: NewCourseDto | CourseEntity) {
 
         if ( obj.id ) {
             if ( obj.id.length !== 36 ) {

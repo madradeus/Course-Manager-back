@@ -25,7 +25,8 @@ coursesRouter
             ...req.body,
             startDate: new Date(req.body.startDate)
         });
-        if ( newCourse.startDate < new Date() ) {
+
+        if ( newCourse.startDate.setHours(0,0,0,0) < new Date().setHours(0,0,0,0) ) {
             throw new ValidationError('Start date cannot be in past')
         }
         const courseId = await newCourse.insert();
