@@ -7,8 +7,4 @@ export interface StudentEntity {
     emailAddress: string;
 }
 
-export interface NewStudentEntity extends Omit<StudentEntity, 'id'> {
-    id?: string
-}
-
 export type SimpleStudentEntity = Omit<StudentEntity, 'gender' | 'dateOfBirth' | 'emailAddress'>;

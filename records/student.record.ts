@@ -1,9 +1,10 @@
-import { NewStudentEntity, SimpleStudentEntity, StudentEntity } from "../types";
+import { NewStudentDto, SimpleStudentEntity, StudentEntity } from "../types";
 import { ValidationError } from "../utils/errors";
 import { isEmail } from "../utils/isEmail";
 import { v4 as uuid } from "uuid";
 import { pool } from "../db/db";
 import { FieldPacket } from "mysql2";
+
 
 
 
@@ -19,7 +20,7 @@ export class StudentRecord implements StudentEntity {
     emailAddress: string;
 
 
-    constructor(obj: NewStudentEntity | StudentEntity) {
+    constructor(obj: NewStudentDto | StudentEntity) {
 
         if ( obj.id ) {
         if ( typeof obj.id !== 'string' || obj.id.length !== 36 ) {
