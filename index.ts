@@ -7,6 +7,7 @@ import { coursesRouter } from "./routers/courses.router";
 import { studentRouter } from "./routers/student.router";
 import { studentCourseRouter } from "./routers/studentCourse.router";
 import { statsRouter } from "./routers/stats.router";
+import helmet from "helmet";
 
 
 const app = express();
@@ -19,8 +20,9 @@ app.use(json({
 }));
 app.use(rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
+    max: 200, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
 }));
+app.use(helmet());
 
 app.use('/courses', coursesRouter);
 app.use('/students', studentRouter);
