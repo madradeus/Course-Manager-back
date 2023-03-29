@@ -33,4 +33,15 @@ studentRouter
         res.status(201);
         res.json(await newStudent.insert());
     })
+    .delete('/:id', async (req, res) => {
+
+        const { id } = req.params;
+        const student = await StudentRecord.getOne(id);
+        if ( !student ) {
+            throw new ValidationError('There is no such student')
+        }
+        await student.delete();
+        res.status(204);
+        res.end();
+    })
 
