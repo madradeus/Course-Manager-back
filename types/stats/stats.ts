@@ -1,11 +1,11 @@
-export interface getNumberOfActiveCoursesResponse {
+export interface GetNumberOfActiveCoursesResponse {
     coursesNumber: number;
 }
 
-export interface getActiveStudentsNumberResponse {
+export interface GetActiveStudentsNumberResponse {
     studentsNumber: number;
 }
 
-export interface getTotalAvgFrequencyResponse {
+export interface GetTotalAvgFrequencyResponse {
     avgFrequency: number;
 }
