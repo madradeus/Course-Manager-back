@@ -4,8 +4,7 @@ import { isEmail } from "../utils/isEmail";
 import { v4 as uuid } from "uuid";
 import { pool } from "../db/db";
 import { FieldPacket } from "mysql2";
-
-
+import { StudentCourseRecord } from "./studentCourse.record";
 
 
 type ManyStudentsRecordsResult = [SimpleStudentEntity[], FieldPacket[]];
@@ -89,5 +88,21 @@ export class StudentRecord implements StudentEntity {
         return birthdayStudents;
     }
 
+    async delete(): Promise<void> {
+        const courses = await StudentCourseRecord.getCoursesOfStudents(this.id);
+        const coursesIds = courses.map(course => course.id);
+        for (const coursesId of coursesIds) {
+            await StudentCourseRecord.delete(coursesId)
+        }
+
+        await pool.execute("DELETE FROM `students` WHERE id = :id", {
+            id: this.id
+        });
+    }
+
 }
+
+
+
+
 

@@ -1,26 +1,34 @@
 import { pool } from "../db/db";
 import { FieldPacket } from "mysql2";
+import {
+    GetActiveStudentsNumberResponse,
+    GetNumberOfActiveCoursesResponse,
+    GetTotalAvgFrequencyResponse
+} from "../types";
+
 
 export class Stats {
 
-    static async getNumberOfActiveCourses(): Promise<number> {
+    static async getNumberOfActiveCourses(): Promise<GetNumberOfActiveCoursesResponse> {
 
-        const [[result]] = await pool.execute("SELECT COUNT(*) as coursesNumber FROM `courses` WHERE isActive = true") as [{ coursesNumber: number }[], FieldPacket[]];
+        const [[result]] = await pool.execute("SELECT COUNT(*) as coursesNumber FROM `courses` WHERE isActive = true") as [GetNumberOfActiveCoursesResponse[], FieldPacket[]];
 
-        return result.coursesNumber;
+        return result;
     }
 
-    static async getActiveStudentsNumber(): Promise<number> {
+    static async getActiveStudentsNumber(): Promise<GetActiveStudentsNumberResponse> {
 
-        const [[result]] = await pool.execute("SELECT COUNT(DISTINCT stc.studentId) as studentsNumber  from `studentCourses` as stc LEFT JOIN `courses` as crs on stc.courseId = crs.id WHERE crs.isActive = true") as [{ studentsNumber: number }[], FieldPacket[]];
+        const [[result]] = await pool.execute("SELECT COUNT(DISTINCT stc.studentId) as studentsNumber  from `studentCourses` as stc LEFT JOIN `courses` as crs on stc.courseId = crs.id WHERE crs.isActive = true") as [GetActiveStudentsNumberResponse[], FieldPacket[]];
 
-        return result.studentsNumber;
+        return result;
     }
 
-    static async getTotalAvgFrequency(): Promise<number> {
+    static async getTotalAvgFrequency(): Promise<GetTotalAvgFrequencyResponse> {
 
        const [[allStudentCourses]] =  await pool.execute("SELECT COUNT(*) as studentsCourses FROM `studentCourses`") as [{ studentsCourses: number }[], FieldPacket[]];
 
-        return allStudentCourses.studentsCourses / await Stats.getNumberOfActiveCourses();
+        return {
+            avgFrequency: allStudentCourses.studentsCourses / (await Stats.getNumberOfActiveCourses()).coursesNumber,
+        }
     }
 }

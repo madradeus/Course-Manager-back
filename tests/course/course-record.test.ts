@@ -13,7 +13,7 @@ beforeAll(() => {
 });
 
 test('Can build Course Record', () => {
-    console.log(defaultCourse)
+
     expect(defaultCourse.id).toBeDefined();
     expect(defaultCourse.name).toEqual('Kizomba od podstaw');
     expect( defaultCourse.startDate  instanceof Date).toBeTruthy();
