@@ -1,3 +1,4 @@
-export * from './StudentCourseDto';
-export * from './NewStudentDto';
-export * from './NewCourseDto';
+export * from './StudentCourse.dto';
+export * from './NewStudent.dto';
+export * from './NewCourse.dto';
+export * from './LoginUser.dto';

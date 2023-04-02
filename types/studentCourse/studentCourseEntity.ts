@@ -2,7 +2,6 @@ export interface StudentCourseEntity {
     id?: string;
     studentId: string;
     courseId: string;
-
 }
 
 export interface CourseOfStudent {

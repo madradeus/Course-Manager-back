@@ -6,4 +6,4 @@ export interface CourseEntity {
     isActive: boolean;
 }
 
-export type SimpleCourseEntity = Omit<CourseEntity, 'startDate'>
+export type SimpleCourseEntity = Omit<CourseEntity, 'startDate'>;

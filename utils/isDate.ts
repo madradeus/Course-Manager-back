@@ -1,4 +1,3 @@
 export const isDate = (s: string) => {
-    return !isNaN(Date.parse(s))
-
-}
+    return !isNaN(Date.parse(s));
+};

@@ -8,5 +8,5 @@ export const pool = mysql.createPool({
     password: config.password,
     namedPlaceholders: true,
     port: 8889,
-    decimalNumbers: true
+    decimalNumbers: true,
 });

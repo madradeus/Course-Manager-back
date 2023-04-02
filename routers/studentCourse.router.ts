@@ -17,7 +17,7 @@ studentCourseRouter
             courseId: string,
         };
 
-        res.json(await StudentCourseRecord.getParticipantsOfCourse(courseId))
+        res.json(await StudentCourseRecord.getParticipantsOfCourse(courseId));
     })
     .delete('/:id', async (req, res) => {
         const { id } = req.params as {
@@ -31,7 +31,6 @@ studentCourseRouter
         });
     })
     .post('/', async (req, res) => {
-
         const newStudentCourse = new StudentCourseRecord(req.body);
         const addedNewStudentCourse = await newStudentCourse.insert();
         res.status(201);

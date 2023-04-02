@@ -29,6 +29,6 @@ export class Stats {
 
         return {
             avgFrequency: allStudentCourses.studentsCourses / (await Stats.getNumberOfActiveCourses()).coursesNumber,
-        }
+        };
     }
 }

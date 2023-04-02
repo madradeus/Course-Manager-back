@@ -13,26 +13,24 @@ coursesRouter
     .get('/:id', async (req, res) => {
 
         res.json(await CourseRecord.getOne(req.params.id));
-
     })
     .post('/', async (req, res) => {
-
         if ( !isDate(req.body.startDate) ) {
             throw new ValidationError('Start Date must be a Date type')
         }
 
         const newCourse = new CourseRecord({
             ...req.body,
-            startDate: new Date(req.body.startDate)
+            startDate: new Date(req.body.startDate),
         });
 
-        if ( newCourse.startDate.setHours(0,0,0,0) < new Date().setHours(0,0,0,0) ) {
+        if ( newCourse.startDate.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ) {
             throw new ValidationError('Start date cannot be in past')
         }
         const courseId = await newCourse.insert();
 
-        res.status(201)
-        res.json(courseId)
+        res.status(201);
+        res.json(courseId);
     })
     .patch('/:id', async (req, res) => {
         const foundCourse = await CourseRecord.getOne(req.params.id);
@@ -40,6 +38,6 @@ coursesRouter
 
         res.json({
             isChanged: 'ok',
-            courseId: foundCourse.id
+            courseId: foundCourse.id,
         })
     })
