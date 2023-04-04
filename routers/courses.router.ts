@@ -34,10 +34,5 @@ coursesRouter
     })
     .patch('/:id', async (req, res) => {
         const foundCourse = await CourseRecord.getOne(req.params.id);
-        await foundCourse.update();
-
-        res.json({
-            isChanged: 'ok',
-            courseId: foundCourse.id,
-        })
+        res.json(await foundCourse.update());
     })
