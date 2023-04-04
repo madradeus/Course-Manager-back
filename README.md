@@ -20,7 +20,7 @@ MySQL database.
 
 Front-end repository - https://github.com/madradeus/Course-Manager-front
 
-### 👓 Demo
+### 👓Demo
 
 Demo link
 ![img_1.png](img_1.png)
@@ -29,7 +29,7 @@ Demo link
 ![img_4.png](img_4.png)
 ![img_5.png](img_5.png)
 
-### 🎆‍ Features
+### 🎆‍Features
 
 - listing courses with filter,
 - single course details,
@@ -43,7 +43,7 @@ Demo link
 - stats,
 - login/logout,
 
-### 🧑‍💻 Tech Stack
+### 🧑‍💻Tech Stack
 
 - typescript 4.9.5,
 - express 4.18.2,
@@ -51,12 +51,12 @@ Demo link
 - mysql2 3.1.0,
 - jest 29.4.2,
 
-### ⏩ Roadmap
+### ⏩Roadmap
 
 - attendance list,
 - payments monitor & notifications,
 
-## 🚀 ️Getting Started
+## 🚀Getting Started
 
 Clone the project
 
@@ -76,7 +76,7 @@ Start the watch mode
 
 Open http://localhost:3000 to view it in the browser.
 
-## 🤝 Contact
+## 🤝Contact
 
 [Mateusz Rodowski](mailto:mateusz.rodowski@gmail.com?subject=[GitHub]) |
 mateusz.rodowski@gmail.com
