@@ -23,11 +23,11 @@ Front-end repository - https://github.com/madradeus/Course-Manager-front
 ### 👓Demo
 
 Demo link
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
-![img_5.png](img_5.png)
+![img_1.png](screens/add-new-course.png)
+![img_2.png](screens/subscribe.png)
+![img_3.png](screens/students-list.png)
+![img_4.png](screens/stats.png)
+![img_5.png](screens/login-page.png)
 
 ### 🎆‍Features
 
