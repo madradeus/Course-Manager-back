@@ -74,8 +74,6 @@ Start the watch mode
 
 ### `npm run start:dev`
 
-Open http://localhost:3000 to view it in the browser.
-
 ## 🤝Contact
 
 [Mateusz Rodowski](mailto:mateusz.rodowski@gmail.com?subject=[GitHub]) |
