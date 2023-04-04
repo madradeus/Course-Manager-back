@@ -13,7 +13,9 @@ export class Auth {
 
         if ( !foundUser ) throw new ValidationError('Wrong login and password');
 
-        const accessToken = jwt.sign({ id: foundUser.id }, config.tokenSecret, {});
+        const accessToken = jwt.sign({ id: foundUser.id }, config.tokenSecret, {
+            expiresIn: '1h'
+        });
         await foundUser.updateToken(accessToken);
         return accessToken;
     }
