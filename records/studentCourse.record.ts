@@ -1,17 +1,16 @@
-import { ValidationError } from "../utils/errors";
-import { pool } from "../db/db";
-import { StudentCourseEntity, CourseOfStudent, ParticipantOfCourse } from "../types";
 import { FieldPacket } from "mysql2";
 import { v4 as uuid } from "uuid";
+import { pool } from "../db/db";
+import { ValidationError } from "../utils/errors";
+import { CourseOfStudent, ParticipantOfCourse, StudentCourseEntity } from "../types";
 
-export class StudentCourseRecord implements StudentCourseEntity{
-    id: string;
+export class StudentCourseRecord implements StudentCourseEntity {
+    id?: string;
     studentId: string;
     courseId: string;
 
     constructor(obj: StudentCourseEntity) {
-
-        if ( obj.studentId.length !== 36  || obj.courseId.length !== 36 ) {
+        if ( obj.studentId.length !== 36 || obj.courseId.length !== 36 ) {
             throw new ValidationError('Wrong studentID or courseId format')
         }
 
@@ -19,8 +18,7 @@ export class StudentCourseRecord implements StudentCourseEntity{
         this.studentId = obj.studentId;
     }
 
-    static async getCoursesOfStudents(studentId: string): Promise<CourseOfStudent[]| []> {
-
+    static async getCoursesOfStudents(studentId: string): Promise<CourseOfStudent[] | []> {
 
         const [coursesOfStudents] = await pool.execute("SELECT stc.id, stc.courseId, crs.name FROM `studentCourses` as stc LEFT JOIN `courses` AS crs ON crs.id = stc.courseId WHERE stc.studentId = :studentId AND crs.isActive = true", {
             studentId
@@ -37,8 +35,6 @@ export class StudentCourseRecord implements StudentCourseEntity{
 
         return participants;
     }
-
-    //@TODO połączyć te 2 metody
 
     async insert( ): Promise<string> {
         if ( !this.id ) {

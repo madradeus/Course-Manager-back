@@ -1,4 +1,4 @@
-import { CourseEntity, NewCourseDto, SimpleCourseEntity } from "../types";
+import { CourseEntity, CourseUpdateResponse, NewCourseDto, SimpleCourseEntity } from "../types";
 import { v4 as uuid } from "uuid";
 import { ValidationError } from "../utils/errors";
 import { pool } from "../db/db";
@@ -49,7 +49,6 @@ export class CourseRecord implements CourseEntity {
 
     static async getAll(): Promise<SimpleCourseEntity []> {
         const [foundCourses] = await pool.execute("SELECT `id`, `name`, `description`, `isActive` from `courses` ORDER BY `name` ASC") as ManyCoursesRecordsResult
-
         return foundCourses.map(course => ({
             ...course,
             isActive: !!Number(course.isActive)
@@ -66,7 +65,7 @@ export class CourseRecord implements CourseEntity {
 }
 
     async insert(): Promise<string> {
-        pool.execute('INSERT INTO `courses` VALUES (:id, :name, :description, :startDate, :isActive)', {
+        await pool.execute('INSERT INTO `courses` VALUES (:id, :name, :description, :startDate, :isActive)', {
             id: this.id,
             name: this.name,
             description: this.description,
@@ -77,11 +76,15 @@ export class CourseRecord implements CourseEntity {
         return this.id
     }
 
-    async update(): Promise<void> {
-        pool.execute(' UPDATE `courses` SET isActive = :isActive WHERE id = :id', {
+    async update(): Promise<CourseUpdateResponse> {
+        await pool.execute(' UPDATE `courses` SET isActive = :isActive WHERE id = :id', {
             id: this.id,
-            isActive:!Number(this.isActive)
+            isActive: !Number(this.isActive)
         });
+        return {
+            courseId: this.id,
+            isChanged: 'ok'
+        }
     }
 
 
