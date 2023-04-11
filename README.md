@@ -22,7 +22,15 @@ Front-end repository - https://github.com/madradeus/Course-Manager-front
 
 ### 👓Demo
 
-Demo link
+DEMO version available at **https://course-manager-m.networkmanager.pl/**
+
+Please use the following credentials to log in:
+
+```
+email: tester@test.pl 
+password: Abc123
+```
+
 ![img_1.png](screens/add-new-course.png)
 ![img_2.png](screens/subscribe.png)
 ![img_3.png](screens/students-list.png)
@@ -65,6 +73,8 @@ Clone the project
 Install dependencies
 
 ### `npm install`
+
+Create `./config/config.ts` file according to `./config/config.example.ts` and complete config object.
 
 Start the server development
 
